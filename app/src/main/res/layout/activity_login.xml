@@ -11,7 +11,7 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="-60dp"
         />
 
     <EditText
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:id="@+id/forgot_pass"
