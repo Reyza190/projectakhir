@@ -2,6 +2,8 @@
     <string name="app_name">projectakhir</string>
     <string name="tagline">Healty anywhere you go!</string>
     <string name="email_hint"><font size="15">Email</font></string>
+    <string name="username_hint"><font size="15">Username</font></string>
     <string name="password_hint"><font size="15">Password</font></string>
     <string name="register">Don’t have an account? <b>Register</b></string>
+    <string name="login">Have an account? <b>Login</b></string>
 </resources>
