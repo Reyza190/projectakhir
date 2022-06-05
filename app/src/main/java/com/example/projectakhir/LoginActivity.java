@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,20 +19,37 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
+    private EditText Email, Password;
+    private Button Login;
+    private TextView Register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        init();
+        Login.setOnClickListener(this);
+        Register.setOnClickListener(this);
+    }
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        UpdateUI(firebaseUser);
     }
     private void init(){
         mAuth = FirebaseAuth.getInstance();
+        Email = findViewById(R.id.email);
+        Password = findViewById(R.id.password);
+        Login = findViewById(R.id.login);
+        Register = findViewById(R.id.register);
     }
 
     private void UpdateUI(FirebaseUser user){
         if (user != null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }else{
+
         }
     }
 
@@ -55,18 +76,30 @@ public class LoginActivity extends AppCompatActivity {
     }
     private boolean validateForm() {
         boolean result = true;
-        if (TextUtils.isEmpty(email.getText().toString())) {
-            email.setError("Required");
+        if (TextUtils.isEmpty(Email.getText().toString())) {
+            Email.setError("Required");
             result = false;
         } else {
-            email.setError(null);
+            Email.setError(null);
         }
-        if (TextUtils.isEmpty(password.getText().toString())) {
-            password.setError("Required");
+        if (TextUtils.isEmpty(Password.getText().toString())) {
+            Password.setError("Required");
             result = false;
         } else {
-            password.setError(null);
+            Password.setError(null);
         }
         return result;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.login:
+                LogIn(Email.getText().toString().trim(), Password.getText().toString().trim());
+                break;
+            case R.id.register:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
+        }
     }
 }

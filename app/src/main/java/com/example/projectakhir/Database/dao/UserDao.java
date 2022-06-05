@@ -29,6 +29,10 @@ public class UserDao {
         return databaseReference.child(mAuth.getUid()).child(id).removeValue();
     }
 
+    public Task<Void> deletePhoto(String id){
+        return databaseReference.child(mAuth.getUid()).child(id).child("image_user").removeValue();
+    }
+
     public Query get (){
         return databaseReference.child(mAuth.getUid()).orderByKey();
     }

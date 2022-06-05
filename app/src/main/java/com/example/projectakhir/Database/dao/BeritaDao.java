@@ -11,7 +11,6 @@ import com.google.firebase.database.Query;
 
 public class BeritaDao {
     private DatabaseReference databaseReference;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public BeritaDao(){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -23,7 +22,7 @@ public class BeritaDao {
     }
 
     public Task<Void> update(String id,Berita berita){
-        return databaseReference.child(mAuth.getUid()).child(id).setValue(berita);
+        return databaseReference.child(id).setValue(berita);
     }
 
     public Task<Void> delete(String id){

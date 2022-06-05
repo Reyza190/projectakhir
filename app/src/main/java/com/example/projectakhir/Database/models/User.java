@@ -1,22 +1,29 @@
 package com.example.projectakhir.Database.models;
 
 public class User {
-    private int image_user;
-    private String username,id, Gender;
+    private String image_user;
+    private String username,id, Gender, email, role;
 
     public User(){}
 
-    public User(int image_user, String username, String gender) {
-        this.image_user = image_user;
+    public User(String username, String email) {
         this.username = username;
-        Gender = gender;
+        this.email = email;
     }
 
-    public int getImage_user() {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getImage_user() {
         return image_user;
     }
 
-    public void setImage_user(int image_user) {
+    public void setImage_user(String image_user) {
         this.image_user = image_user;
     }
 
@@ -42,5 +49,13 @@ public class User {
 
     public void setGender(String gender) {
         Gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
