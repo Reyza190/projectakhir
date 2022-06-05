@@ -225,7 +225,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(getApplicationContext(), "Update succesfully", Toast.LENGTH_SHORT).show();
-                    finish();
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
