@@ -1,10 +1,14 @@
 package com.example.projectakhir;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +26,7 @@ import com.example.projectakhir.Database.models.Berita;
 import com.example.projectakhir.Database.models.User;
 import com.example.projectakhir.adapter.AppAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +40,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private SearchView searchView;
     private TextView user;
     private CircleImageView img_profile;
     private ImageView img_profile_dummy;
@@ -66,7 +72,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         getalluser();
+        if (searchView != null){
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
 
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return true;
+                }
+            });
+        }
+
+    }
+
+    private void search(String newText) {
+        ArrayList<Berita> beritaArrayList = new ArrayList<>();
+        for (Berita berita1 : beritas){
+            if (berita1.getJudul().toLowerCase().contains(newText)){
+                beritaArrayList.add(berita1);
+            }
+        }
+        adapter = new AppAdapter(MainActivity.this, beritaArrayList, listener);
+        recyclerView.setAdapter(adapter);
     }
 
     private void setRecycleview() {
@@ -75,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init(){
+        searchView = findViewById(R.id.search);
         intent2 = new Intent(getApplicationContext(), ProfileActivity.class);
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -103,6 +135,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private final Listener listener = new Listener() {
+        @Override
+        public void onLongCLick(Berita berita, CardView cardView) {
+            showPopUpmenuDashboard(berita.getId(), cardView);
+        }
+    };
+
+    private void showPopUpmenuDashboard(String id, CardView cardView) {
+        if (role.equals("admin")) {
+            PopupMenu popupMenu = new PopupMenu(this, cardView);
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.edit:
+                            Intent intent = new Intent(MainActivity.this, AddArticleActivity.class);
+                            intent.putExtra("ID", id);
+                            startActivity(intent);
+                            return true;
+
+                        case R.id.delete:
+                            deleteData(id);
+                            return true;
+                    }
+                    return false;
+                }
+            });
+            popupMenu.inflate(R.menu.menuupdatedelete);
+            popupMenu.show();
+        }
+    }
+
+    private void deleteData(String id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Delete");
+        builder.setMessage("Anda yakin delete data ini ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                beritaDao.delete(id).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getApplicationContext(), "Delete berhasil", Toast.LENGTH_SHORT).show();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Delete dibatalkan", Toast.LENGTH_SHORT).show();
+                dialogInterface.dismiss();
+            }
+        });builder.show();
+    }
 
     private void userdata(String id) {
         if (id != null) {
@@ -139,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     beritas.add(berita);
 
                 }
-                adapter = new AppAdapter(MainActivity.this, beritas);
+                adapter = new AppAdapter(MainActivity.this, beritas, listener);
                 recyclerView.setAdapter(adapter);
             }
 

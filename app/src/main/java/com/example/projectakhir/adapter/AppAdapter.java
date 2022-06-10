@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.projectakhir.Database.models.Berita;
 import com.example.projectakhir.DetailActivity;
+import com.example.projectakhir.Listener;
 import com.example.projectakhir.R;
 
 import java.util.ArrayList;
@@ -24,10 +25,12 @@ import java.util.List;
 public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Viewholder> {
     private Activity context;
     private ArrayList<Berita> beritaList = new ArrayList<>();
+    private Listener listener;
 
-    public AppAdapter(Activity context, ArrayList<Berita> beritaList) {
+    public AppAdapter(Activity context, ArrayList<Berita> beritaList, Listener listener) {
         this.context = context;
         this.beritaList = beritaList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,6 +51,14 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Viewholder> {
             intent.putExtra("BERITA", berita.getId());
             context.startActivity(intent);
         });
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.onLongCLick(beritaList.get(holder.getAdapterPosition()), holder.cardView);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -61,7 +72,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Viewholder> {
         private CardView cardView;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.image_article);
+            cardView = itemView.findViewById(R.id.card);
             judul = itemView.findViewById(R.id.txt_article_title);
             image = itemView.findViewById(R.id.img_article);
             desc = itemView.findViewById(R.id.txt_article_desc);

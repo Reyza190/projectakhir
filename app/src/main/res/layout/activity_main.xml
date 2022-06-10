@@ -66,7 +66,10 @@
             android:textColor="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_homepage"
         android:layout_marginBottom="8dp"

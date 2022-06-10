@@ -156,7 +156,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 } else if (items[i].equals("Delete")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
                     builder.setTitle("Delete");
-                    builder.setMessage("Anda yakin delete note ini ?");
+                    builder.setMessage("Anda yakin delete gambar ini ?");
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
