@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful()) {
                         users = task.getResult().getValue(User.class);
-                        user.setText("Hi " + users.getUsername());
+                        user.setText("Hi " + users.getUsername() + " !");
                         role = users.getRole();
                         if (users.getImage_user() != null) {
                             Glide.with(getApplicationContext()).load(users.getImage_user()).into(img_profile);
