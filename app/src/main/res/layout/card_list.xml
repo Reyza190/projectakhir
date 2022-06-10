@@ -29,7 +29,9 @@
                 android:id="@+id/img_article"
                 android:layout_width="140dp"
                 android:layout_height="80dp"
-                android:src="@drawable/img_article" />
+                android:src="@drawable/img_article"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
 
         </androidx.cardview.widget.CardView>
 
