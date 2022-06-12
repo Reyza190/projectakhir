@@ -15,20 +15,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="60dp"/>
-
-    <TextView
-        android:id="@+id/tagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tagline"
-        android:textColor="@color/tertiary"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="-100dp"
         />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tagline"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/tagline"-->
+<!--        android:textColor="@color/tertiary"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/logo"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        android:layout_marginTop="-60dp"-->
+<!--        />-->
 
     <EditText
         android:id="@+id/username"
@@ -39,10 +40,11 @@
         android:paddingStart="30dp"
         android:hint="@string/username_hint"
         android:textColorHint="@color/tertiary"
-        app:layout_constraintTop_toBottomOf="@+id/tagline"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="-80dp"
+        />
 
     <EditText
         android:id="@+id/email"
