@@ -50,14 +50,15 @@
 
     <TextView
         android:id="@+id/txt_details_title"
-        android:text="Title"
-        android:textSize="40dp"
+        android:text="Pengaruh mandi malam kepada kesehatan tubuh"
+        android:textSize="30dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_details_back"
         android:layout_marginTop="25dp"
-        android:layout_marginStart="15dp"
+        android:paddingHorizontal="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -67,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_details_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_width="320dp"
         android:layout_height="180dp"
         android:adjustViewBounds="true"
@@ -83,7 +84,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingHorizontal="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
